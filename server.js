@@ -1,3 +1,5 @@
+
+console.log("SERVER VERSION 2");
 const express = require("express");
 const cors = require("cors");
 
@@ -17,16 +19,19 @@ initializeApp({
   "https://bee-hive-e4a1f-default-rtdb.europe-west1.firebasedatabase.app"
 });
 
+
 const db = getDatabase();
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+const PORT = process.env.PORT || 3000;
 
 // Home Page
 
 app.get("/", (req, res) => {
+
 
   res.json({
 
@@ -55,25 +60,24 @@ app.get("/ping", (req, res) => {
 
 
 app.get("/testhive", async (req, res) => {
-
   try {
 
     await db.ref("hives/Hive01").set({
-
-      temperature: 34.5,
-      humidity: 67.2,
-      weight: 42.8,
+      temperature: 109,
+      humidity: 36,
+      weight: 52,
       status: "online"
-
     });
 
+    const snapshot =
+      await db.ref("hives/Hive01").get();
+
     res.json({
-      success: true
+      success: true,
+      data: snapshot.val()
     });
 
   } catch(error) {
-
-    console.error(error);
 
     res.json({
       success: false,
@@ -81,7 +85,6 @@ app.get("/testhive", async (req, res) => {
     });
 
   }
-
 });
 
 app.get("/sendtest", async (req, res) => {
@@ -302,7 +305,7 @@ app.get("/routes", (req, res) => {
 
 });
 console.log("NEW VERSION LOADED");
-const PORT = process.env.PORT || 3000;
+
 
 app.listen(PORT, () => {
 
