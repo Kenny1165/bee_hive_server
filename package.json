@@ -1,14 +1,11 @@
 {
-  "name": "bee-hive-dashboard(1)",
+  "name": "bee-hive-server",
   "version": "1.0.0",
-  "description": "",
-  "main": "firebase-config.js",
+  "description": "Bee Hive Proxy Server",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "type": "commonjs",
   "dependencies": {
     "cors": "^2.8.6",
