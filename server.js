@@ -64,6 +64,14 @@ app.get("/ping", (req, res) => {
 
 });
 
+// SIM800L Test Route
+
+app.get("/simtest", (req, res) => {
+
+  res.send("SIM800 OK");
+
+});
+
 
 app.get("/testhive", async (req, res) => {
   try {
