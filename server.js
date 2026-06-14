@@ -318,6 +318,53 @@ app.get("/routes", (req, res) => {
   });
 
 });
+
+app.get("/simhive", async (req, res) => {
+
+  try {
+
+    const hiveID = req.query.hiveID || "Hive01";
+
+    const temperature =
+      parseFloat(req.query.temperature);
+
+    const humidity =
+      parseFloat(req.query.humidity);
+
+    const weight =
+      parseFloat(req.query.weight);
+
+    await db.ref(`hives/${hiveID}`).set({
+
+      temperature,
+      humidity,
+      weight,
+
+      status: "online",
+
+      lastUpdate: Date.now()
+
+    });
+
+    await db
+      .ref(`history/${hiveID}/${Date.now()}`)
+      .set({
+
+        temperature,
+        humidity,
+        weight
+
+      });
+
+    res.send("OK");
+
+  } catch(error) {
+
+    res.status(500).send(error.message);
+
+  }
+
+});
 console.log("NEW VERSION LOADED");
 
 
