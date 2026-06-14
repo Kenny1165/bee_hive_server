@@ -9,9 +9,9 @@ require("firebase-admin/app");
 const { getDatabase } =
 require("firebase-admin/database");
 
-const serviceAccount =
-require("./firebase-key.json");
-
+const serviceAccount = JSON.parse(
+  process.env.FIREBASE_SERVICE_ACCOUNT
+);
 initializeApp({
   credential: cert(serviceAccount),
 
@@ -63,8 +63,8 @@ app.get("/testhive", async (req, res) => {
   try {
 
     await db.ref("hives/Hive01").set({
-      temperature: 109,
-      humidity: 36,
+      temperature: 9,
+      humidity: 6,
       weight: 52,
       status: "online"
     });
