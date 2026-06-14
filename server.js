@@ -9,6 +9,12 @@ require("firebase-admin/app");
 const { getDatabase } =
 require("firebase-admin/database");
 
+if (!process.env.FIREBASE_SERVICE_ACCOUNT) {
+  throw new Error(
+    "FIREBASE_SERVICE_ACCOUNT environment variable not found"
+  );
+}
+
 const serviceAccount = JSON.parse(
   process.env.FIREBASE_SERVICE_ACCOUNT
 );
